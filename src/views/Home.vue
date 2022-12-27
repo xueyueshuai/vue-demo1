@@ -1,29 +1,28 @@
 <template>
   <div class="home-page">
-    <h2 class="van-doc-demo-block__title">新知地工具</h2>
+<!--    <h2 class="van-doc-demo-block__title">新知地工具</h2>-->
 
-<!--    <van-cell-group inset>-->
-<!--      <van-cell title="单元格" value="内容"/>-->
-<!--      <van-cell title="单元格" value="内容" label="描述信息"/>-->
-<!--    </van-cell-group>-->
 
-    <a class="aaa" @click="$router.push('/xzd/tool/rili')">
+    <a class="every-card" @click="$router.push('/xzd/tool/rili')">
       新知地日历
     </a>
-    <a class="aaa">
-      新知地工具2
+
+    <a class="every-card" @click="$router.push('/test/xys/test1')">
+      新知地抽奖
     </a>
-    <a class="aaa">
+
+    <a class="every-card" @click="showNo">
       新知地工具3
     </a>
+
   </div>
 </template>
 
 <script>
-
-import {Cell, CellGroup} from 'vant';
+import {Cell, CellGroup,Toast} from 'vant';
 import 'vant/lib/cell/style';
 import 'vant/lib/cell-group/style';
+import 'vant/lib/toast/style';
 
 
 export default {
@@ -31,9 +30,15 @@ export default {
   components: {
     [Cell.name]: Cell,
     [CellGroup.name]: CellGroup,
+    // [Toast.name]: Toast,
   },
   mounted() {
     // this.$router.push('/test/xys/test1')
+  },
+  methods:{
+    showNo(){
+      Toast('aaa')
+    }
   }
 }
 </script>
@@ -55,12 +60,13 @@ export default {
   line-height: 16px;
 }
 
-.aaa{
+
+.every-card{
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  margin: 0 40px 12px;
+  margin: 20px 20px 0;
   padding-left: 20px;
   color: #323233;
   font-weight: 600;
@@ -68,5 +74,7 @@ export default {
   line-height: 40px;
   background: #f7f8fa;
   border-radius: 99px;
+  overflow: hidden;
 }
+
 </style>

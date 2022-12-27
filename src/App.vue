@@ -1,33 +1,34 @@
 <template>
   <div id="app">
-    <div id="app">
       <keep-alive>
         <router-view v-if="$route.meta.keepAlive" :key="$route.fullPath"/>
       </keep-alive>
       <router-view v-if="!$route.meta.keepAlive" :key="$route.fullPath"/>
-    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 html {
-  font-size: 20px;  // 相当于1rem = 10px
+  font-size: 10px; // 相当于1rem = 10px
 }
 
 body {
-  font-size: 32px;
 }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   overflow: hidden;
+  width: 375px;
 }
+
 * {
   margin: 0;
   padding: 0;
-  font-size: 3.2rem;
+  font-size: 16px;
+
 
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   -webkit-user-select: none;
@@ -39,7 +40,7 @@ body {
 
 /deep/ .van-icon-arrow-left {
   color: #333 !important;
-  font-size: 4rem;
+  //font-size: 20px;
 }
 </style>
 

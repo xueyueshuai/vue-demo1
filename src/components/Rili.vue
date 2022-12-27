@@ -27,7 +27,7 @@
 
     </div>
 
-    <div style="text-align: center;margin: 4rem">
+    <div style="text-align: center;margin: 40px">
       <button class="next-month-btn" @click="clickNowMonth">
         返回当前月
       </button>
@@ -76,7 +76,7 @@ export default {
       }).finally(() => {
         setTimeout(() => {
           this.loading = false
-        }, 1000)
+        }, 100)
       })
     },
     getToday() {
@@ -194,11 +194,12 @@ export default {
 <style lang="scss" scoped>
 
 .rili-page {
+  //font-size: 10px;
   color: #1d4c28;
 }
 
 .btn-month-btn {
-  height: 10rem;
+  height: 50px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -206,28 +207,28 @@ export default {
 
 .pro-month-btn, .next-month-btn {
   border: 0 solid red;
-  border-radius: .8rem;
-  padding: 1rem 2rem;
+  border-radius: 4px;
+  padding: 5px 10px;
   background: #1d4c28;
   color: #fff;
 }
 
 .day-list {
-  width: 75rem;
+  width: 375px;
   overflow: hidden;
 }
 
 .day-div {
-  width: 8rem;
-  height: 4rem;
-  margin: 1.3rem;
+  width: 40px;
+  height: 20px;
+  margin: 6.5px;
   text-align: center;
-  line-height: 4rem;
+  line-height: 20px;
   overflow: hidden;
   float: left;
   box-sizing: border-box;
-  border: .2rem solid #fff;
-  border-radius: .4rem;
+  border: 1px solid #fff;
+  border-radius: 2px;
 }
 
 .day-green {
