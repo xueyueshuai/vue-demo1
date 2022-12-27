@@ -11,6 +11,7 @@ const routes = [
     component: Home
   },
   {path: '/xzd/tool/rili', name: 'xzdToolRili', component: () => import('../views/xzd/tool/Rili.vue')},
+  {path: '/xzd/tool/choujiang', name: 'xzdToolChoujiang', component: () => import('../views/xzd/tool/Choujiang.vue')},
 
 
   {path: '/test/xys/test1', name: 'testXysTest1', component: () => import('../views/test/xys/test1.vue')},

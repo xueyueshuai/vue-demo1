@@ -1,6 +1,6 @@
 <template>
   <div>
-    test2
+    test-xys-test2
   </div>
 </template>
 

@@ -7,13 +7,13 @@
       新知地日历
     </a>
 
-    <a class="every-card" @click="$router.push('/test/xys/test1')">
+    <a class="every-card" @click="$router.push('/xzd/tool/choujiang')">
       新知地抽奖
     </a>
 
-    <a class="every-card" @click="showNo">
-      新知地工具3
-    </a>
+<!--    <a class="every-card" @click="showNo">-->
+<!--      新知地工具3-->
+<!--    </a>-->
 
   </div>
 </template>
