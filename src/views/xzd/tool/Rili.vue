@@ -11,7 +11,7 @@
 
 <script>
 
-import Rili from "../../../components/Rili";
+import Rili from "@/components/Rili";
 
 import {NavBar} from 'vant'
 import 'vant/lib/nav-bar/style';
