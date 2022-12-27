@@ -3,7 +3,7 @@
 import router from '../router'
 
 export const showErrorMsg = (title, msg) => {
-  window.alert('err:'+title+','+msg)
+  window.alert('err:' + title + ',' + msg)
   // Notification({
   //   title,
   //   message: msg,
@@ -11,7 +11,7 @@ export const showErrorMsg = (title, msg) => {
   // })
 }
 export const showSuccessMsg = (title, msg, options = {}) => {
-  window.alert('success:'+title+','+msg)
+  window.alert('success:' + title + ',' + msg)
   // Notification({
   //   title,
   //   message: msg,
@@ -42,3 +42,7 @@ export const logoutSuccess = () => {
   showSuccessMsg('提示', '退出登录成功')
 }
 
+
+export const rand = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
