@@ -1,5 +1,6 @@
 <template>
   <div style="overflow: hidden;border:1px solid #fff">
+
     <div class="father-div">
       <img ref="img" class="zp" src="@/assets/choujiang/zp.png"/>
       <img class="zz" src="@/assets/choujiang/zz.png" @click="startPlay"/>
@@ -9,7 +10,6 @@
       <van-button @click="startPlay">开始游戏</van-button>
     </div>
 
-    <!--    <van-button v-if="status===2">开始游戏</van-button>-->
   </div>
 </template>
 
@@ -34,19 +34,12 @@ export default {
   methods: {
     startPlay() {
       this.r += rand(360 * 6, 360 * 12)
-
-
       if ((this.r-30) % 60 <= 3) {
         this.r += 3
       }
-
       if ((this.r-30) % 60 >=57) {
         this.r -= 3
       }
-
-      console.log((this.r-30)%60)
-
-
       this.$refs.img.style.transform = 'rotate(' + this.r + 'deg)'
     },
   }
@@ -66,17 +59,16 @@ export default {
   .zp {
     transform: rotate(0deg);
     transition: transform 3s;
-
     width: 100%;
     height: 100%;
   }
 
   .zz {
     width: 80px;
-
     position: absolute;
     left: 110px;
     top: 110px;
   }
 }
+
 </style>
