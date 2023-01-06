@@ -2,12 +2,12 @@
   <div class="home-page">
 <!--    <h2 class="van-doc-demo-block__title">新知地工具</h2>-->
 
-
     <a class="every-card" @click="$router.push('/xzd/tool/rili')">新知地日历</a>
 
     <a class="every-card" @click="$router.push('/xzd/tool/choujiang')">新知地抽奖</a>
 
-    <a class="every-card" @click="goTo('https://xueyueshuai.github.io/docs/guide/xzdRule/web/')">web工程师必读</a>
+    <a class="every-card" @click="goTo('https://rili.iwto.cn/docs/guide/xzdRule/pro/')">售前人员必读</a>
+    <a class="every-card" @click="goTo('https://rili.iwto.cn/docs/guide/xzdRule/web/')">web工程师必读</a>
 
 <!--    <a class="every-card" @click="showNo">-->
 <!--      新知地工具3-->
@@ -51,6 +51,7 @@ export default {
 <style lang="scss" scoped>
 .home-page{
   min-height: 100vh;
+  overflow: hidden;
   //background: #f7f8fa;
 }
 

@@ -156,7 +156,7 @@ export default {
       // 空多少天
       let emptyTotal
       if (dayOfWeek === 0) {
-        emptyTotal = 0
+        emptyTotal = 6
       } else {
         emptyTotal = dayOfWeek - 1
       }
