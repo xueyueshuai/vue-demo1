@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ChatGPT</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="./js/vue.js"></script>
+    <script src="./js/models.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <style>
+        #app {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+            color: black;
+            font-size: 16px;
+        }
+
+        .page-title {
+            text-align: center;
+
+        }
+
+        .message-container {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .message-container .message {
+            white-space: pre-wrap;
+
+            max-width: 60%;
+            padding: 10px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+        .message-container .user-message {
+            background-color: #f0f0f0;
+        }
+
+        .message-container .bot-message {
+            background-color: #8bc34a;
+            color: #fff;
+        }
+
+
+        .select-modelName {
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border: 2px solid black;
+        }
+
+        .left-right {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .select-haveVip {
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border: 2px solid black;
+        }
+
+        .input-apiKey {
+            border: 2px solid black;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            width: 420px;
+        }
+
+        .question-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .input-question {
+            border: 2px solid black;
+            width: 750px;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .submit-btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            color: #fff;
+            background-color: black;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <h1 class="page-title">Chat with ChatGPT (gpt-3.5-turbo-0301)</h1> -->
+        <h1 class="page-title">
+            <span>
+                Chat with ChatGPT
+            </span>
+        </h1>
+
+        <fieldset style="border: 2px solid black;margin-bottom: 40px;border-radius: 5px;">
+            <legend>配置</legend>
+
+            <div class="left-right">
+                <span>有无翻墙能力</span>
+                <select v-model="haveVpn" class="select-haveVip">
+                    <option value="have">有翻墙能力</option>
+                    <option value="noHave">无翻墙能力</option>
+                </select>
+            </div>
+
+            <div class="left-right">
+                <span>
+                    apiKey:
+                </span>
+                <div>
+                    <input class="input-apiKey" type="text" v-model="apiKey" placeholder="apiKey" />
+                </div>
+            </div>
+            <div class="left-right">
+                <span>
+                    model:
+                </span>
+                <div>
+                    <select v-model="modelName" class="select-modelName">
+                        <option v-for="(item,index) in models" :key="item.id" :value="item.id">{{item.id}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+
+        <div v-for="message in messages" class="message-container">
+            <div class="message" :class="message.type === 'user' ? 'user-message' : 'bot-message'"
+                v-text="message.text"></div>
+        </div>
+
+        <form @submit.prevent="sendMessage" v-show="!loading">
+            <div class="question-row">
+                <input class="input-question" ref="input-question" type="text" v-model="userMessage"
+                    placeholder="Ask ChatGPT anything..." />
+                <!-- <button class="submit-btn" type="submit">Send</button> -->
+                <button class="submit-btn" type="submit">Ask</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                apiKey: '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',
+                messages: [
+                    {
+                        type: 'bot',
+                        text: "您好,有什么不懂得可以在下面的输入框问我哈"
+                    },
+                    {
+                        type: 'bot',
+                        text: "Work like you don't need the money. Love like you've never been hurt. Dance like nobody's watching."
+                    },
+                    {
+                        type: 'bot',
+                        text: "目录：\n\n第一章 草原少年\n\n第二章 巨蟒突袭\n\n第三章 家族危机\n\n第四章 九龙神火罩\n\n第五章 魔兽蛮荒林\n\n第六章 功法传承\n\n第七章 三千雷霆之力\n\n第八章 初入修真界\n\n第九章 吊打圣地弟子\n\n第十章 万劫不复\n\n第十一章 烈焰天芒\n\n第十二章 千年恶灵\n\n第十三章 万毒丧魂阵\n\n第十四章 月影斩\n\n第十五章 气海九转\n\n第十六章 炼体千重\n\n第十七章 斗转星移\n\n第十八章 恶龙血脉\n\n第十九章 不死神功\n\n第二十章 斗者之间"
+                    },
+                    {
+                        type: 'bot',
+                        text: '<div style="width:100px;height:100px;background:red"></div>'
+
+                    },
+
+                ],
+                userMessage: "",
+                loading: false,
+                haveVpn: 'noHave',
+                models: models,
+                modelName: 'gpt-3.5-turbo-0301'
+            },
+            mounted() {
+                this.messages.pop()
+                this.messages.pop()
+                this.messages.pop()
+                if (localStorage.getItem('apiKey')) {
+                    this.apiKey = localStorage.getItem('apiKey')
+                }
+            },
+            methods: {
+                sendMessage() {
+                    let that = this
+
+                    let question = this.userMessage
+                    // let apiKey = this.apiKey || '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'
+                    let apiKey = this.apiKey
+                    this.apiKey = apiKey
+
+                    if (apiKey) {
+                        localStorage.setItem('apiKey', apiKey)
+                    } else {
+                        alert('请输入apiKey')
+                        return
+                    }
+
+                    if (!question) {
+                        alert('请输入问题')
+                        return
+                    }
+
+                    this.messages.push({ text: this.userMessage, type: "user" });
+                    this.userMessage = "";
+                    this.messages.push({ text: '程序思考中...', type: "bot" });
+
+                    let url = ''
+                    if (that.haveVpn === 'have') {
+                        url = 'https://api.openai.com/v1/chat/completions'
+                    } else {
+                        url = 'https://chat.xinzhidi.cn/api/test/ask'
+                    }
+
+                    var settings = {
+                        "url": url,
+                        "method": "POST",
+                        "timeout": 0,
+                        "headers": {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + apiKey
+                        },
+                        "data": JSON.stringify({
+                            "model": that.modelName || "gpt-3.5-turbo",
+                            "messages": [
+                                {
+                                    "role": "user",
+                                    "content": question
+                                }
+                            ]
+                        }),
+                        'complete': () => {
+                            that.loading = false
+                            setTimeout(() => {
+                                that.$refs['input-question'].focus()
+                            }, 200)
+
+                        },
+                        'error': () => {
+                            alert('访问异常')
+                        },
+                    };
+
+                    that.loading = true
+                    $.ajax(settings).done(function (res) {
+                        let response
+
+                        if (that.haveVpn === 'have') {
+                            response = res
+                        } else {
+                            response = res.data.res
+                        }
+
+                        if (response.choices && response.choices.length && response.choices[0].message && response.choices[0].message.content) {
+                            that.messages.pop();
+                            that.messages.push({ text: response.choices[0].message.content, type: "bot" });
+                        } else {
+                            alert('error')
+                        }
+                    })
+                },
+            },
+        });
+    </script>
+</body>
+
+</html>
