@@ -182,7 +182,7 @@
         new Vue({
             el: "#app",
             data: {
-                apiKey: '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',
+                apiKey: '',
                 messages: [
                     {
                         type: 'bot',
@@ -213,16 +213,16 @@
                 this.messages.pop()
                 this.messages.pop()
                 this.messages.pop()
-                if (localStorage.getItem('apiKey')) {
-                    this.apiKey = localStorage.getItem('apiKey')
-                }
+                // if (localStorage.getItem('apiKey')) {
+                //     this.apiKey = localStorage.getItem('apiKey')
+                // }
+                this.apiKey = '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'
             },
             methods: {
                 sendMessage() {
                     let that = this
 
                     let question = this.userMessage
-                    // let apiKey = this.apiKey || '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'
                     let apiKey = this.apiKey
                     this.apiKey = apiKey
 
