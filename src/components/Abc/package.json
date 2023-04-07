@@ -1,0 +1,11 @@
+{
+
+  "name": "xys-test-frist-component",
+  "version": "1.0.0",
+  "description": "xys-test",
+  "license": "MIT",
+  "main": "index.vue",
+  "keywords": [
+    "xys-test"
+  ]
+}

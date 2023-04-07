@@ -3,24 +3,26 @@
 <!--    <h2 class="van-doc-demo-block__title">新知地工具</h2>-->
 
     <a class="every-card" @click="$router.push('/xzd/tool/rili')">新知地日历</a>
+    <a class="every-card" @click="$router.push('/xzd/tool/rili?type=2')">新知地日历</a>
 
     <a class="every-card" @click="$router.push('/xzd/tool/choujiang')">新知地抽奖</a>
 
     <a class="every-card" @click="goTo('https://rili.iwto.cn/docs/guide/xzdRule/pro/')">售前人员必读</a>
     <a class="every-card" @click="goTo('https://rili.iwto.cn/docs/guide/xzdRule/web/')">web工程师必读</a>
 
-<!--    <a class="every-card" @click="showNo">-->
-<!--      新知地工具3-->
-<!--    </a>-->
+    <div style="text-align: center;padding: 20px">
+      <van-button type="primary" size="small" icon="replay" @click="refreshPage">刷新</van-button>
+    </div>
 
   </div>
 </template>
 
 <script>
-import {Cell, CellGroup,Toast} from 'vant';
+import {Cell, CellGroup, Toast,Button} from 'vant';
 import 'vant/lib/cell/style';
 import 'vant/lib/cell-group/style';
 import 'vant/lib/toast/style';
+import 'vant/lib/button/style';
 
 
 export default {
@@ -28,7 +30,7 @@ export default {
   components: {
     [Cell.name]: Cell,
     [CellGroup.name]: CellGroup,
-    // [Toast.name]: Toast,
+    [Button.name]: Button,
   },
   mounted() {
     // this.$router.push('/test/xys/test1')
@@ -41,6 +43,10 @@ export default {
       if(url){
         window.location.href=url
       }
+    },
+    refreshPage(){
+      window.location.reload()
+      // window.location.href='./'
     }
   }
 }

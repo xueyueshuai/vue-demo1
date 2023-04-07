@@ -1,65 +1,50 @@
 <template>
-  <div class="test1-page">
-    <div class="pc-window" ref="pcWindow">
-      <iframe style="width:100%;height: 100%" src="https://lightly.teamcode.com/dashboard"></iframe>
-    </div>
+  <div>
+    <van-count-down :time="s" format="DD 天 HH 时 mm 分 ss 秒" />
+<!--    <van-button type="primary"></van-button>-->
+    <abc></abc>
   </div>
-
 </template>
 
 <script>
+import { CountDown,Button } from 'vant';
+import 'vant/lib/count-down/style';
+import 'vant/lib/button/style';
+// import Abc from "@/components/Abc";
+
+import Abc from '@xueyueshuai/frist-component'
 
 export default {
+  components:{
+    Abc,
+    [CountDown.name]:CountDown,
+    [Button.name]:Button,
+  },
   name: '',
   data() {
-    return {}
+    return {
+      s:0
+    }
   },
   mounted() {
-    // 获取屏幕的w,h
-    console.log(document.body.clientWidth)
-    console.log(document.body.clientHeight)
 
-    // 子元素
-    let son_width = 1300
-    let son_height = document.body.clientHeight * 1300 / document.body.clientWidth
+    let bDay = new Date('2023-06-18T00:00:00')
+    let nowDay = new Date()
 
-    this.$refs.pcWindow.style.width = son_width + 'px'
-    this.$refs.pcWindow.style.height = son_height + 'px'
+    let bS = bDay.getTime()
+    let nowS = nowDay.getTime()
 
-    console.log(son_height)
+    this.s = bS-nowS
+    if(this.s<0){
+      this.s = 0
+    }
 
-    // 缩放比例
-    let scale_w = document.body.clientWidth / son_width
-    let scale_h = document.body.clientHeight / son_height
-    console.log(scale_w)
-    console.log(scale_h)
-    let s = Math.min(scale_w, scale_h) * 0.99
-    console.log(s)
 
-    setTimeout(() => {
-      this.$refs.pcWindow.style.transform = 'scale(' + s + ')'
-      this.$refs.pcWindow.style.transformOrigin = 'left top'
-      this.$refs.pcWindow.style.position = 'absolute'
-      this.$refs.pcWindow.style.left = ((document.body.clientWidth - son_width * s) / 2) + 'px'
-      this.$refs.pcWindow.style.top = ((document.body.clientHeight - son_height * s) / 2) + 'px'
-    }, 1000)
   },
-  methods: {}
+  methods:{
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-.test1-page {
-  width: 375px;
-  height: 100Vh;
-  box-sizing: border-box;
-}
-
-.pc-window {
-  width: 1300PX;
-  height: 800Px;
-  border: 1Px solid red;
-  box-sizing: border-box;
-  overflow: hidden;
-}
 </style>
