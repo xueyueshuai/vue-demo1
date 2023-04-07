@@ -16,10 +16,10 @@
             var oWidth = document.body.clientWidth || document.documentElement.clientWidth; /*获取设备的宽度  ||后为兼容IE低版本写法*/
             html.style.fontSize = oWidth / 7.5 + "px"; /*设置根元素<html>字体大小   计算出的值 就相当于1rem;为什么？ 这就是rem单位的规定 1rem就等于根元素<html>字体大小*/
 
-            if(oWidth / 7.5 >= 100){
+            if (oWidth / 7.5 >= 100) {
                 html.style.fontSize = '100px'
             }
-            
+
         }
 
         /*页面初始化调用getRem()*/
@@ -217,6 +217,16 @@
                 //     this.apiKey = localStorage.getItem('apiKey')
                 // }
                 this.apiKey = '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'
+
+
+                // 使用Fetch API调用API
+                fetch('./js/apiKey.json')
+                    .then(response => response.json())
+                    .then(json => {
+                        this.apiKey = json.apiKey
+                    })
+                    .catch(error => console.error(error));
+
             },
             methods: {
                 sendMessage() {
@@ -275,6 +285,7 @@
 
                         },
                         'error': () => {
+                            that.messages.pop();
                             alert('访问异常')
                         },
                     };
@@ -293,6 +304,7 @@
                             that.messages.pop();
                             that.messages.push({ text: response.choices[0].message.content, type: "bot" });
                         } else {
+                            that.messages.pop();
                             alert('error')
                         }
                     })
