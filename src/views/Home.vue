@@ -1,14 +1,16 @@
 <template>
   <div class="home-page">
-<!--    <h2 class="van-doc-demo-block__title">新知地工具</h2>-->
+    <!--    <h2 class="van-doc-demo-block__title">新知地工具</h2>-->
 
     <a class="every-card" @click="$router.push('/xzd/tool/rili')">新知地日历</a>
-    <a class="every-card" @click="$router.push('/xzd/tool/rili?type=2')">新知地日历</a>
+    <!-- <a class="every-card" @click="$router.push('/xzd/tool/rili?type=2')">新知地日历</a> -->
 
     <a class="every-card" @click="$router.push('/xzd/tool/choujiang')">新知地抽奖</a>
 
     <a class="every-card" @click="goTo('https://rili.iwto.cn/docs/guide/xzdRule/pro/')">售前人员必读</a>
     <a class="every-card" @click="goTo('https://rili.iwto.cn/docs/guide/xzdRule/web/')">web工程师必读</a>
+
+    <a class="every-card" @click="goTo('https://rili.iwto.cn/chat')">Chat With ChatGpt</a>
 
     <div style="text-align: center;padding: 20px">
       <van-button type="primary" size="small" icon="replay" @click="refreshPage">刷新</van-button>
