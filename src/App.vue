@@ -8,13 +8,6 @@
 </template>
 
 <style lang="scss" scoped>
-html {
-  font-size: 10px; // 相当于1rem = 10px
-}
-
-body {
-}
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -22,13 +15,17 @@ body {
   color: #2c3e50;
   overflow: hidden;
   width: 375px;
+
+  max-width: 750PX;
+  margin: 0 auto;
+
+  font-size: 16px;
+
 }
 
 * {
   margin: 0;
   padding: 0;
-  font-size: 16px;
-
 
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   -webkit-user-select: none;

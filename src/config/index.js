@@ -1,5 +1,5 @@
 export default {
-  appName:'',
+  appName:'rili',
 
   apiHost:'https://jiaziphp.iwto.cn'
 

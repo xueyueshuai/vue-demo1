@@ -64,7 +64,7 @@
             background-color: #f0f0f0;
         }
 
-        .message-container .bot-message {
+        .message-container .assistant-message {
             background-color: #8bc34a;
             color: #fff;
         }
@@ -165,15 +165,14 @@
         </fieldset>
 
         <div v-for="message in messages" class="message-container">
-            <div class="message" :class="message.type === 'user' ? 'user-message' : 'bot-message'"
-                v-text="message.text"></div>
+            <div class="message" :class="message.role === 'user' ? 'user-message' : 'assistant-message'"
+                v-text="message.content"></div>
         </div>
 
         <form @submit.prevent="sendMessage" v-show="!loading">
             <div class="question-row">
                 <input class="input-question" ref="input-question" type="text" v-model="userMessage"
                     placeholder="Ask ChatGPT anything..." />
-                <!-- <button class="submit-btn" type="submit">Send</button> -->
                 <button class="submit-btn" type="submit">Ask</button>
             </div>
         </form>
@@ -185,21 +184,20 @@
                 apiKey: '',
                 messages: [
                     {
-                        type: 'bot',
-                        text: "您好,有什么不懂得可以在下面的输入框问我哈"
+                        role: 'assistant',
+                        content: "您好,有什么不懂得可以在下面的输入框问我哈"
                     },
                     {
-                        type: 'bot',
-                        text: "Work like you don't need the money. Love like you've never been hurt. Dance like nobody's watching."
+                        role: 'assistant',
+                        content: "Work like you don't need the money. Love like you've never been hurt. Dance like nobody's watching."
                     },
                     {
-                        type: 'bot',
-                        text: "目录：\n\n第一章 草原少年\n\n第二章 巨蟒突袭\n\n第三章 家族危机\n\n第四章 九龙神火罩\n\n第五章 魔兽蛮荒林\n\n第六章 功法传承\n\n第七章 三千雷霆之力\n\n第八章 初入修真界\n\n第九章 吊打圣地弟子\n\n第十章 万劫不复\n\n第十一章 烈焰天芒\n\n第十二章 千年恶灵\n\n第十三章 万毒丧魂阵\n\n第十四章 月影斩\n\n第十五章 气海九转\n\n第十六章 炼体千重\n\n第十七章 斗转星移\n\n第十八章 恶龙血脉\n\n第十九章 不死神功\n\n第二十章 斗者之间"
+                        role: 'assistant',
+                        content: "目录：\n\n第一章 草原少年\n\n第二章 巨蟒突袭\n\n第三章 家族危机\n\n第四章 九龙神火罩\n\n第五章 魔兽蛮荒林\n\n第六章 功法传承\n\n第七章 三千雷霆之力\n\n第八章 初入修真界\n\n第九章 吊打圣地弟子\n\n第十章 万劫不复\n\n第十一章 烈焰天芒\n\n第十二章 千年恶灵\n\n第十三章 万毒丧魂阵\n\n第十四章 月影斩\n\n第十五章 气海九转\n\n第十六章 炼体千重\n\n第十七章 斗转星移\n\n第十八章 恶龙血脉\n\n第十九章 不死神功\n\n第二十章 斗者之间"
                     },
                     {
-                        type: 'bot',
-                        text: '<div style="width:100px;height:100px;background:red"></div>'
-
+                        role: 'assistant',
+                        content: '<div style="width:100px;height:100px;background:red"></div>'
                     },
 
                 ],
@@ -210,6 +208,7 @@
                 modelName: 'gpt-3.5-turbo-0301'
             },
             mounted() {
+                this.messages.pop()
                 this.messages.pop()
                 this.messages.pop()
                 this.messages.pop()
@@ -248,9 +247,9 @@
                         return
                     }
 
-                    this.messages.push({ text: this.userMessage, type: "user" });
+                    this.messages.push({ content: this.userMessage, role: "user" });
                     this.userMessage = "";
-                    this.messages.push({ text: '程序思考中...', type: "bot" });
+                    this.messages.push({ content: '程序思考中...', role: "assistant" });
 
                     let url = ''
                     if (that.haveVpn === 'have') {
@@ -276,6 +275,7 @@
                                     "content": question
                                 }
                             ]
+                            // "messages": that.messages.slice(-4, -1)
                         }),
                         'complete': () => {
                             that.loading = false
@@ -302,7 +302,7 @@
 
                         if (response.choices && response.choices.length && response.choices[0].message && response.choices[0].message.content) {
                             that.messages.pop();
-                            that.messages.push({ text: response.choices[0].message.content, type: "bot" });
+                            that.messages.push({ content: response.choices[0].message.content, role: "assistant" });
                         } else {
                             that.messages.pop();
                             alert('error')
